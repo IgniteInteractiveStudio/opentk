@@ -1485,6 +1485,12 @@ namespace OpenTK.Platform.Windows
         public static extern DWORD_PTR SHGetFileInfo(LPCTSTR pszPath, DWORD dwFileAttributes, ref SHFILEINFO psfi, UINT cbFileInfo, ShGetFileIconFlags uFlags);
 
         #endregion
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern uint InSendMessageEx(IntPtr lpReserved);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern void SetCursor(IntPtr cursor);
     }
 
     #region --- Constants ---

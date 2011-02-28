@@ -142,6 +142,8 @@ namespace OpenTK.Platform.Windows
 
         #region Private Members
 
+        readonly IntPtr _defaultCursor = Functions.LoadCursor(CursorName.Arrow);
+
         #region WindowProcedure
 
         IntPtr WindowProcedure(IntPtr handle, WindowMessage message, IntPtr wParam, IntPtr lParam)
@@ -269,6 +271,15 @@ namespace OpenTK.Platform.Windows
 
                 #region Input events
 
+                case WindowMessage.SETCURSOR:
+                    if ((short)((uint)lParam.ToInt32() & 0x0000FFFF) == 1) // HTCLIENT?
+                    {
+                        var sender = Functions.InSendMessageEx(IntPtr.Zero);
+                        if (sender == 0)
+                            return IntPtr.Zero;
+                    }
+                    break;
+
                 case WindowMessage.CHAR:
                     if (IntPtr.Size == 4)
                         key_press.KeyChar = (char)wParam.ToInt32();
@@ -290,6 +301,8 @@ namespace OpenTK.Platform.Windows
                         // re-entered the window.
                         mouse_outside_window = false;
                         EnableMouseTracking();
+
+                        Functions.SetCursor(_defaultCursor);
 
                         MouseEnter(this, EventArgs.Empty);
                     }
