@@ -1,0 +1,29 @@
+# User configuration files.
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.vs10x
+*.tssettings
+*.userprefs
+*ReSharper*
+
+# Output directories (object/binary files).
+*/bin/*
+*/*/bin/*
+*/obj/*
+*/*/obj/*
+*/*/Release/*
+*/*/Debug/*
+
+# Debugging database files.
+*.pdb
+*.pidb
+
+#Performance logs
+*.vsp
+
+# OpenTK versioninfo hack fuckup (seriously lrn2code) ...
+*/GlobalAssemblyInfo.cs
+*/OpenTK/OpenTK.xml
+Version.txt
